@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EducationController;
+use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SkillController;
 use App\Http\Controllers\UserDetailController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,5 +42,14 @@ Route::get('home', [HomeController::class,'index'])->name('home');
 //     Route::get('create', [EducationController::class,'create'])->name('education.create');
 // });
 
+//User Details
 Route::resource('user-detail', UserDetailController::class)->middleware('auth');
+
+//Education
 Route::resource('education', EducationController::class)->middleware('auth');
+
+//Experience
+Route::resource('experience',ExperienceController::class)->middleware('auth');
+
+//Skill
+Route::resource('skill',SkillController::class)->middleware('auth');

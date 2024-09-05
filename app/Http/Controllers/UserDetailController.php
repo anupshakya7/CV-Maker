@@ -14,7 +14,9 @@ class UserDetailController extends Controller
      */
     public function index()
     {
+        $detail = auth()->user()->detail;
 
+        return view('user_details.index',compact('detail'));
     }
 
     /**
@@ -51,7 +53,7 @@ class UserDetailController extends Controller
         $detail->user_id = auth()->user()->id;
         $detail->save();
 
-        return redirect()->route('education.create');
+        return redirect()->route('education.create')->with('success','User Detail Inserted Successfully!!!');
     }
 
     /**
@@ -73,7 +75,7 @@ class UserDetailController extends Controller
      */
     public function edit(UserDetail $userDetail)
     {
-        //
+        return view('user_details.edit',compact('userDetail'));
     }
 
     /**
@@ -85,7 +87,15 @@ class UserDetailController extends Controller
      */
     public function update(Request $request, UserDetail $userDetail)
     {
-        //
+        $request->validate([
+            'fullname' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'address' => 'required'
+        ]);
+
+        $userDetail->update($request->all());
+        return redirect()->route('user-detail.index')->with('success','User Detail Updated Successfully!!!');
     }
 
     /**
@@ -96,6 +106,7 @@ class UserDetailController extends Controller
      */
     public function destroy(UserDetail $userDetail)
     {
-        //
+        $userDetail->delete();
+        return redirect()->route('user-detail.index')->with('success','User Detail Deleted Successfully!!!');
     }
 }

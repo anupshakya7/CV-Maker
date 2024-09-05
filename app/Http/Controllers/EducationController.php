@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class EducationController extends Controller
 {
+    public function index(){
+        $educations = auth()->user()->education;
+        return view('education.index',compact('educations'));
+    }
+    
+    public function show(){
+        //
+    }
+
     public function create()
     {
         return view('education.create');
@@ -24,16 +33,32 @@ class EducationController extends Controller
             'graduation_end_date' => 'required',
         ]);
 
-        $detail = new Education();
-        $detail->school_name = $request->input('school_name');
-        $detail->school_location = $request->input('school_location');
-        $detail->degree = $request->input('degree');
-        $detail->field_of_study = $request->input('field_of_study');
-        $detail->graduation_start_date = $request->input('graduation_start_date');
-        $detail->graduation_end_date = $request->input('graduation_end_date');
-        $detail->user_id = auth()->user()->id;
-        $detail->save();
+        auth()->user()->education()->create($request->all());
 
-        return redirect()->route('education.create');
+        return redirect()->route('education.index')->with('success','Education Inserted Successfully!!!');
+    }
+
+    public function edit(Education $education){
+        return view('education.edit',compact('education'));
+    }
+
+    public function update(Request $request,Education $education){
+        $request->validate([
+            'school_name' => 'required',
+            'school_location' => 'required',
+            'degree' => 'required',
+            'field_of_study' => 'required',
+            'graduation_start_date' => 'required',
+            'graduation_end_date' => 'required',
+        ]);
+
+        $education->update($request->all());
+
+        return redirect()->route('education.index')->with('success','Education Updated Successfully!!!');
+    }
+
+    public function destroy(Education $education){
+        $education->delete();
+        return redirect()->route('education.index')->with('success','Education Deleted Successfully!!!');
     }
 }

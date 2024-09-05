@@ -11,6 +11,7 @@
         @endif
     </div>
     <div class="card p-3 mt-3">
+        <h3>Add Education</h3>
         <form action="{{route('education.store')}}" method="POST">
             @csrf
             <div class="mb-3">
