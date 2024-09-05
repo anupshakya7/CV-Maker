@@ -14,7 +14,7 @@ class UserDetailController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -37,19 +37,21 @@ class UserDetailController extends Controller
     {
 
         $request->validate([
-            'fullname'=>'required',
-            'email'=>'required|email',
-            'phone'=>'required',
+            'fullname' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'address' => 'required'
         ]);
 
         $detail = new UserDetail();
         $detail->fullname = $request->input('fullname');
         $detail->phone = $request->input('phone');
         $detail->email = $request->input('email');
+        $detail->address = $request->input('address');
         $detail->user_id = auth()->user()->id;
         $detail->save();
 
-
+        return redirect()->route('education.create');
     }
 
     /**
