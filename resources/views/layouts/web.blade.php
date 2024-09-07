@@ -19,8 +19,10 @@
 
 <body>
     <div class="container">
+        @if(auth()->user())
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb p-3">
+                <button class="btn btn-primary">Preview</button>
                 <li class="breadcrumb-item {{request()->is('user-detail') ? 'active':''}} "><a
                         href="{{route('user-detail.index')}}">User Detail</a></li>
                 <li class="breadcrumb-item {{request()->is('education') ? 'active':''}}"><a
@@ -31,6 +33,7 @@
                         href="{{route('skill.index')}}">Skills</a></li>
             </ol>
         </nav>
+        @endif
         @yield('content')
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

@@ -42,14 +42,23 @@ class UserDetailController extends Controller
             'fullname' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
-            'address' => 'required'
+            'address' => 'required',
+            'summary' => 'required',
         ]);
+        
+        $userDetails = UserDetail::where('user_id',auth()->user()->id)->first();
 
-        $detail = new UserDetail();
+        if(!empty($userDetails)){
+            $detail = $userDetails;
+        }else{
+            $detail = new UserDetail();
+        }
+
         $detail->fullname = $request->input('fullname');
         $detail->phone = $request->input('phone');
         $detail->email = $request->input('email');
         $detail->address = $request->input('address');
+        $detail->summary = $request->input('summary');
         $detail->user_id = auth()->user()->id;
         $detail->save();
 
@@ -91,7 +100,8 @@ class UserDetailController extends Controller
             'fullname' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
-            'address' => 'required'
+            'address' => 'required',
+            'summary' => 'required',
         ]);
 
         $userDetail->update($request->all());

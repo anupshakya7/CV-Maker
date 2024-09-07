@@ -14,22 +14,11 @@
         <h3>Create User Detail</h3>
         <form action="{{route('user-detail.store')}}" method="POST">
             @csrf
-            <div class="mb-3">
-                <label for="fullname" class="form-label">Fullname</label>
-                <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Full Name">
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email Address</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
-            </div>
-            <div class="mb-3">
-                <label for="phone" class="form-label">Phone</label>
-                <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number">
-            </div>
-            <div class="mb-3">
-                <label for="address" class="form-label">Address</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="Address">
-            </div>
+            <x-input name="fullname" placeholder="Full Name"></x-input>
+            <x-input name="email" placeholder="Email Address"></x-input>
+            <x-input name="phone" placeholder="Phone Number"></x-input>
+            <x-input name="address" placeholder="Address"></x-input>
+            <x-textarea name="summary" placeholder="Summary"></x-textarea>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

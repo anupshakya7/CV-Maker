@@ -15,4 +15,5 @@
         </form>
     </div>
 </div>
+<a href="{{route('user-detail.create')}}" class="btn btn-primary mt-4">Add Another User Details</a>
 @endsection

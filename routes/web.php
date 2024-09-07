@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\UserDetailController;
 use Illuminate\Support\Facades\Route;
@@ -53,3 +54,7 @@ Route::resource('experience',ExperienceController::class)->middleware('auth');
 
 //Skill
 Route::resource('skill',SkillController::class)->middleware('auth');
+
+Route::prefix('resume')->middleware('auth')->group(function(){
+    Route::get('/',[ResumeController::class,'index'])->name('resume.index');
+});
